@@ -1,7 +1,7 @@
+encrypted= input ("enter the value of encrypted character")
+ascii_value = ord(encrypted)
 
-key=int(input ("Enter the key (hex):" ),16)
-encrypted=int (input("Enter the encrypted text (hex):"),16)
-secret= (key)^(encrypted)
-
-print(secret)
-print(hex(secret))
+key = int (input ("Enter the value of key (hex):"),16)
+secret = (ascii_value) ^ key
+result = chr(secret)
+print (result)
