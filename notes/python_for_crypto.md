@@ -84,3 +84,109 @@ hex(secret)
 
 # f-String
 print(f"Secret = {secret}")
+
+# Bytes and String XOR
+
+## String → Bytes
+
+```python
+text = "Hello"
+text.encode()
+# b'Hello'
+
+b"Hello".decode()
+# "Hello"
+
+from Crypto.Util.strxor import strxor
+
+strxor(b"AAA", b"16/")
+# b'pwn'
+
+# One-Time Pad (OTP)
+
+## What is a One-Time Pad?
+
+A One-Time Pad (OTP) is an encryption technique where each byte of the plaintext is XORed with a random key of the same length.
+
+Encryption:
+
+```text
+Ciphertext = Plaintext ^ Key
+```
+
+Decryption:
+
+```text
+Plaintext = Ciphertext ^ Key
+```
+
+Since XOR is self-inverse:
+
+```text
+(A ^ B) ^ B = A
+```
+
+the same key is used for both encryption and decryption.
+
+---
+
+## `bytes.fromhex()`
+
+Converts a hexadecimal string into bytes.
+
+Example:
+
+```python
+bytes.fromhex("414243")
+```
+
+Output:
+
+```python
+b'ABC'
+```
+
+---
+
+## Difference between `encode()` and `bytes.fromhex()`
+
+### `encode()`
+
+Converts **text → bytes**
+
+```python
+"ABC".encode()
+```
+
+Output:
+
+```python
+b'ABC'
+```
+
+---
+
+### `bytes.fromhex()`
+
+Converts a **hexadecimal string → bytes**
+
+```python
+bytes.fromhex("414243")
+```
+
+Output:
+
+```python
+b'ABC'
+```
+
+---
+
+## Quick Reference
+
+| Function | Purpose |
+|----------|---------|
+| `encode()` | String → Bytes |
+| `decode()` | Bytes → String |
+| `bytes.fromhex()` | Hex String → Bytes |
+| `strxor()` | XOR two byte strings |
