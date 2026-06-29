@@ -1,7 +1,8 @@
-encrypted= input ("enter the value of encrypted character")
-ascii_value = ord(encrypted)
+from Crypto.Util.strxor import strxor
 
-key = int (input ("Enter the value of key (hex):"),16)
-secret = (ascii_value) ^ key
-result = chr(secret)
-print (result)
+ciphertext = bytes.fromhex(input("Enter the ciphertext (hex): "))
+key = bytes.fromhex(input("Enter the key (hex): "))
+
+result = strxor(ciphertext, key)
+
+print(result.decode())
