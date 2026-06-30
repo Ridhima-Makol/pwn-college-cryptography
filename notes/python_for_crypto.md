@@ -190,3 +190,87 @@ b'ABC'
 | `decode()` | Bytes → String |
 | `bytes.fromhex()` | Hex String → Bytes |
 | `strxor()` | XOR two byte strings |
+
+# One-Time Pad Tampering
+
+## Security Properties
+
+### Confidentiality
+
+Protects the secrecy of the message.
+
+Question:
+
+> Can an attacker read the plaintext?
+
+A One-Time Pad provides perfect confidentiality if the key is random, secret, and used only once.
+
+---
+
+### Integrity
+
+Protects the message from unauthorized modification.
+
+Question:
+
+> Can an attacker change the message?
+
+A One-Time Pad **does not** provide integrity.
+
+---
+
+## Known Plaintext Attack
+
+If
+
+```
+Ciphertext = Plaintext ^ Key
+```
+
+and both the plaintext and ciphertext are known,
+
+the key can be recovered:
+
+```
+Key = Ciphertext ^ Plaintext
+```
+
+---
+
+## Forging a Ciphertext
+
+To make the receiver decrypt to a chosen message:
+
+```
+Desired Ciphertext = Desired Plaintext ^ Key
+```
+
+---
+
+## Useful Functions
+
+```python
+bytes.fromhex()
+```
+
+Hex string → Bytes
+
+```python
+strxor()
+```
+
+Byte-wise XOR
+
+```python
+.hex()
+```
+
+Bytes → Hex string
+
+---
+
+## Important Lesson
+
+Encryption **does not automatically provide integrity**.
+
+Modern cryptographic systems combine encryption with authentication (e.g., AES-GCM) to prevent message tampering.

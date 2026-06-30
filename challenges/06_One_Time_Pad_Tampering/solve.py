@@ -2,8 +2,8 @@ from Crypto.Util.strxor import strxor
 
 ciphertext = bytes.fromhex(input("Enter the ciphertext (hex): "))
 
-
 key = strxor(ciphertext, b"sleep")
 
-New_Ciphertext = strxor(b"flag!", key)
-print(New_Ciphertext.hex())
+new_ciphertext = strxor(b"flag!", key)
+
+print(new_ciphertext.hex())
