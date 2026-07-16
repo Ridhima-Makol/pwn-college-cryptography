@@ -274,3 +274,69 @@ Bytes → Hex string
 Encryption **does not automatically provide integrity**.
 
 Modern cryptographic systems combine encryption with authentication (e.g., AES-GCM) to prevent message tampering.
+
+# Many-Time Pad
+
+## One-Time Pad
+
+```
+Ciphertext = Plaintext ^ Key
+```
+
+```
+Plaintext = Ciphertext ^ Key
+```
+
+---
+
+## Recovering the Key
+
+If both plaintext and ciphertext are known,
+
+```
+Key = Ciphertext ^ Plaintext
+```
+
+---
+
+## Chosen Plaintext Attack
+
+If an attacker can choose the plaintext and observe its ciphertext,
+
+the corresponding key bytes can be recovered.
+
+Example:
+
+```
+Plaintext = AAAAA...
+```
+
+```
+Ciphertext = AAAAA... ^ Key
+```
+
+Therefore,
+
+```
+Key = Ciphertext ^ AAAAA...
+```
+
+---
+
+## Recovering Another Message
+
+Once the key is known,
+
+```
+Message = Ciphertext ^ Key
+```
+
+can decrypt any ciphertext encrypted using that same key.
+
+---
+
+## Important Lesson
+
+A One-Time Pad is perfectly secure **only when the key is never reused**.
+
+Reusing the key turns it into a **Many-Time Pad**, making key recovery possible through chosen plaintext attacks.
