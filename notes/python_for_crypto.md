@@ -340,3 +340,82 @@ can decrypt any ciphertext encrypted using that same key.
 A One-Time Pad is perfectly secure **only when the key is never reused**.
 
 Reusing the key turns it into a **Many-Time Pad**, making key recovery possible through chosen plaintext attacks.
+
+# AES ECB
+
+## AES
+
+AES stands for Advanced Encryption Standard.
+
+It is a symmetric block cipher.
+
+The same key is used for encryption and decryption.
+
+---
+
+## Block Size
+
+AES always encrypts blocks of
+
+```
+16 bytes
+```
+
+If the plaintext is shorter than a multiple of 16 bytes, padding is added.
+
+---
+
+## AES Object
+
+```python
+cipher = AES.new(key, AES.MODE_ECB)
+```
+
+This creates an AES cipher object.
+
+No encryption or decryption happens here.
+
+The object is configured with
+
+- the secret key
+- the encryption mode
+
+---
+
+## Encryption
+
+```python
+cipher.encrypt(data)
+```
+
+Encrypts the plaintext.
+
+---
+
+## Decryption
+
+```python
+cipher.decrypt(ciphertext)
+```
+
+Decrypts the ciphertext.
+
+---
+
+## Removing Padding
+
+```python
+unpad(data, cipher.block_size)
+```
+
+Removes the padding added before encryption.
+
+---
+
+## Hex to Bytes
+
+```python
+bytes.fromhex(hex_string)
+```
+
+Converts hexadecimal text into bytes so AES can process it.
