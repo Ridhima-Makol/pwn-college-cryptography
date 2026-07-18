@@ -419,3 +419,50 @@ bytes.fromhex(hex_string)
 ```
 
 Converts hexadecimal text into bytes so AES can process it.
+
+# AES ECB Codebook Attack
+
+AES-ECB has the property:
+
+```text
+Same plaintext + Same key = Same ciphertext
+```
+
+This deterministic behavior can leak information.
+
+## Encryption Oracle
+
+An encryption oracle allows us to submit chosen plaintext and receive its ciphertext.
+
+Using pwntools:
+
+```python
+from pwn import *
+
+p = process("/challenge/run")
+
+p.recvuntil(b"Choice? ")
+p.sendline(b"1")
+```
+
+- `process()` starts a program.
+- `recvuntil()` waits for specific output.
+- `sendline()` sends input as bytes.
+- `recvline()` reads one line.
+
+## Codebook Attack
+
+If we obtain the ciphertext of an unknown character, we can encrypt possible characters using the same key:
+
+```text
+Unknown → Ciphertext X
+
+"a" → Ciphertext A
+"b" → Ciphertext B
+...
+"p" → Ciphertext X
+```
+
+The matching ciphertext reveals the unknown plaintext.
+
+This does not recover the AES key or break AES itself. It exploits ECB's deterministic behavior.
