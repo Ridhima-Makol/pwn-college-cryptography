@@ -10,8 +10,8 @@ Diffie-Hellman allows two parties to establish the same shared secret over a pub
 
 The public parameters are:
 
-- `p` — a large prime modulus
-- `g` — a generator
+- `p` - a large prime modulus
+- `g` - a generator
 
 Alice generates a private value:
 
